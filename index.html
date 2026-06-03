@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FinanceFlow — Dashboard Finances Personnel</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="import-screen" class="import-screen">
+    <div class="import-center">
+      <div class="import-logo">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#01696f"/><path d="M12 34L24 14L36 34" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="14" r="3.5" fill="white"/><path d="M17 26H31" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
+        <div><h1>FinanceFlow</h1><p>Dashboard finances personnel open-source</p></div>
+      </div>
+      <div class="import-card">
+        <div class="import-title">📂 Importer vos exports CSV</div>
+        <div class="import-desc">Glissez-déposez vos exports de banque ou cliquez pour sélectionner.<br>BoursoBank · LCL · N26 · Revolut · Société Générale · tout CSV standard.</div>
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-icon">📁</div>
+          <div class="drop-text">Glisser-déposer vos fichiers CSV ici</div>
+          <div class="drop-sub">ou</div>
+          <label class="btn-primary" for="fileInput">Sélectionner des fichiers</label>
+          <input type="file" id="fileInput" accept=".csv" multiple style="display:none">
+        </div>
+        <div id="file-list" class="file-list"></div>
+        <div id="import-actions" style="display:none;margin-top:1rem">
+          <button class="btn-primary" onclick="startAnalysis()">🚀 Analyser mes finances</button>
+        </div>
+      </div>
+      <div class="import-banks">
+        <div class="import-banks-title">Banques supportées</div>
+        <div class="banks-row" id="banks-row"></div>
+      </div>
+      <div class="import-demo">
+        <button class="btn-ghost" onclick="loadDemo()">🎯 Charger les données démo</button>
+        <span class="import-demo-sub">Essayer sans importer de fichier</span>
+      </div>
+    </div>
+  </div>
+  <div id="dashboard" class="app-layout" style="display:none">
+    <aside class="sidebar">
+      <div class="logo">
+        <svg width="30" height="30" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#01696f"/><path d="M12 34L24 14L36 34" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="14" r="3.5" fill="white"/><path d="M17 26H31" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
+        <div><div class="logo-text">FinanceFlow</div><div class="logo-sub" id="logo-period">–</div></div>
+      </div>
+      <div class="nav-sec">Vue d'ensemble</div>
+      <button class="nav-item active" data-page="overview">📊 Tableau de bord</button>
+      <button class="nav-item" data-page="transactions">📋 Transactions</button>
+      <div class="nav-sec">Analyses</div>
+      <button class="nav-item" data-page="categories">🗂️ Catégories</button>
+      <button class="nav-item" data-page="subscriptions">🔔 Abonnements</button>
+      <button class="nav-item" data-page="budget">🎯 Budget & Objectifs</button>
+      <button class="nav-item" data-page="accounts">🏦 Comptes</button>
+      <div class="sidebar-foot">
+        <div id="account-chips"></div>
+        <div style="display:flex;gap:.4rem;margin-top:.625rem">
+          <button class="thbtn" onclick="toggleTheme()">🌙</button>
+          <button class="thbtn" onclick="goImport()" style="flex:1;font-size:.72rem">+ Importer</button>
+        </div>
+      </div>
+    </aside>
+    <main class="main" id="main-content"></main>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="src/parsers.js"></script>
+<script src="src/analyzer.js"></script>
+<script src="src/charts.js"></script>
+<script src="src/pages.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
